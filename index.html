@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Form</title>
+</head>
+<body>
+  <h1>Registration Form</h1>
+  <form>
+
+    
+    <label for="fullname">Full Name:</label><br>
+    <input type="text" id="fullname" name="fullname" required><br><br>
+
+    <label for="email">Email Address:</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="username">Username:</label><br>
+    <input type="text" id="username" name="username" required><br><br>
+
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password" required><br><br>
+
+    <label>Gender:</label>
+    <input type="radio" id="male" name="gender" value="male">
+    <label for="male">Male</label>
+
+    <input type="radio" id="female" name="gender" value="female">
+    <label for="female">Female</label><br> <br>
+
+
+    <label for="department">Department:</label>
+    <select id="department" name="department">
+      <option value="">Select Dept</option>
+      <option value="cse">CSE</option>
+      <option value="eee">EEE</option>
+      <option value="bba">BBA</option>
+      <option value="ipe">IPE</option>
+    </select><br>  <br>
+
+    <label for="textarea">Address:</label><br>
+    <textarea name="message" rows="10" cols="30">
+    </textarea> <br><br>
+
+    <label for="myfile">Select a file:</label>
+    <input type="file" id="myfile" name="myfile">
+    <br> <br>
+
+    <input type="checkbox" id="agree" name="agree" required>
+    <label for="agree">I agree to the terms and conditions</label><br><br>
+
+    <button type="button">Submit</button>
+
+
+  </form>
+</body>
+</html>
+
+
