@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Person Profile</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            border: 1px solid black;
+            padding: 6px;
+            position: relative; /* needed for pseudo-element positioning */
+        }
+
+        .title-row td {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            position: static; /* remove relative from title row */
+        }
+
+        .blank-row td {
+            height: 20px;
+            padding: 0;
+        }
+
+        /* extra add */
+        table tr:nth-child(n+2):nth-child(-n+8) td:last-child::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: calc(50% + 105px);
+            width: 0.5px;
+            background-color: black;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+
+<body>
+    <form enctype="multipart/form-data">
+        <table>
+            <tr class="title-row">
+                <td colspan="2">PERSON PROFILE</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="email" name="email"></td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td>
+                    <input type="radio" name="gender" value="Male"> Male
+                    <input type="radio" name="gender" value="Female"> Female
+                    <input type="radio" name="gender" value="Other"> Other
+                </td>
+            </tr>
+            <tr>
+                <td>Date of Birth</td>
+                <td>
+                    <input type="text" name="day" size="2" placeholder="dd"> /
+                    <input type="text" name="month" size="2" placeholder="mm"> /
+                    <input type="text" name="year" size="4" placeholder="yyyy">
+                </td>
+            </tr>
+            <tr>
+                <td>Blood Group</td>
+                <td>
+                    <select name="bloodgroup">
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Degree</td>
+                <td>
+                    <input type="checkbox" name="degree" value="SSC"> SSC
+                    <input type="checkbox" name="degree" value="HSC"> HSC
+                    <input type="checkbox" name="degree" value="BSc"> BSc
+                    <input type="checkbox" name="degree" value="MSc"> MSc
+                </td>
+            </tr>
+            <tr>
+                <td>Photo</td>
+                <td><input type="file" name="photo"></td>
+            </tr>
+            <tr class="blank-row">
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Submit">
+                    <input type="reset" value="Reset">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>
