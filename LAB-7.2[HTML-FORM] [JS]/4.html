@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Date of Birth</title></head>
+<body>
+    <h1>DOB Validation</h1>
+    <form onsubmit="return validateDOB()" action="sub_fdb.html">
+        <fieldset>
+            <legend>Date of Birth</legend>
+            dd: <input type="text" id="dd" size="2">
+            mm: <input type="text" id="mm" size="2">
+            yyyy: <input type="text" id="yyyy" size="4">
+            <p id="dobError"></p>
+            <input type="submit" value="Submit">
+        </fieldset>
+    </form>
+
+    <script>
+        function validateDOB() {
+            let dd = parseInt(document.getElementById('dd').value);
+            let mm = parseInt(document.getElementById('mm').value);
+            let yyyy = parseInt(document.getElementById('yyyy').value);
+            let dobError = document.getElementById('dobError');
+
+            if (isNaN(dd) || isNaN(mm) || isNaN(yyyy)) {
+                dobError.style.color = "red";
+                dobError.innerHTML = "Fields cannot be empty";
+                return false;
+            } else if (dd < 1 || dd > 31 || mm < 1 || mm > 12 || yyyy < 1900 || yyyy > 2016) {
+                dobError.style.color = "red";
+                dobError.innerHTML = "Invalid date";
+                return false;
+            } else {
+                dobError.innerHTML = "";
+                return true;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Email</title>
+  <style>
+    .info-icon {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      background-color: #007BFF; 
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 18px;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      cursor: help;
+      margin-left: 6px;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <form name="emailForm" onsubmit="return validateEmail()" method="post" action="sub_fdb.html">
+    Email: 
+    <input type="text" name="email" id="email" aria-describedby="emailHint">
+    <span class="info-icon" title="example@example.com">i</span>
+    <br>
+    <p id="emailError" style="color:red;"></p>
+    <input type="submit" value="Submit">
+  </form>
+
+  <script>
+    function validateEmail() {
+      let email = document.getElementById('email').value.trim();
+      let valid = true;
+
+      if (email === "") {
+        document.getElementById('emailError').innerHTML = "Email cannot be empty";
+        valid = false;
+      } else if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
+        document.getElementById('emailError').innerHTML = "Email format is invalid";
+        valid = false;
+      } else {
+        document.getElementById('emailError').innerHTML = "";
+      }
+
+      return valid;
+    }
+  </script>
+</body>
+</html>

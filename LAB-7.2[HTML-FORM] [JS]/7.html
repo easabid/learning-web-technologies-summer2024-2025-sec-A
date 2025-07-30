@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Picture Upload</title></head>
+<body>
+  <form name="picForm" onsubmit="return validatePic()" method="post" action="sub_fdb.html" enctype="multipart/form-data">
+    User ID: <input type="number" id="userId"><br>
+    <p id="userIdError"></p>
+    Upload Picture: <input type="file" id="picture"><br>
+    <p id="pictureError"></p>
+    <input type="submit" value="Upload">
+  </form>
+
+  <script>
+    function validatePic() {
+      let userId = document.getElementById('userId').value.trim();
+      let picture = document.getElementById('picture').value;
+      let valid = true;
+
+      if (userId === "" || parseInt(userId) <= 0) {
+        document.getElementById('userIdError').innerHTML = "UserId cannot be empty and has to be a positive number";
+        document.getElementById('userIdError').style.color = "red";
+        valid = false;
+      } else {
+        document.getElementById('userIdError').innerHTML = "";
+      }
+
+      if (picture === "") {
+        document.getElementById('pictureError').innerHTML = "Picture cannot be empty";
+        document.getElementById('pictureError').style.color = "red";
+        valid = false;
+      } else {
+        document.getElementById('pictureError').innerHTML = "";
+      }
+
+      return valid;
+    }
+  </script>
+</body>
+</html>
