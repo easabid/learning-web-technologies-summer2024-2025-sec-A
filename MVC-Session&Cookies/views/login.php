@@ -18,14 +18,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "⚠️ All fields are required!";
     } elseif (isset($users[$username]) && $users[$username]['password'] === $password) {
         // Store in session
+        $_SESSION['status'] = true;
         $_SESSION['username'] = $username;
         $_SESSION['role'] = $users[$username]['role'];
 
-        // Store in cookies (for 1 day)
-        setcookie("username", $username, time() + 86400, "/");
-        setcookie("password", $password, time() + 86400, "/");
+        // Handle "Remember Me" functionality
+        if (isset($_POST['remember'])) {
+            // Store username in cookie for 30 days
+            setcookie("username", $username, time() + (30 * 24 * 60 * 60), "/");
+        } else {
+            // If "Remember Me" is not checked, remove the cookie
+            setcookie("username", "", time() - 3600, "/");
+        }
 
-        header("Location: dashboard.php");
+        // Redirect based on role
+        if ($_SESSION['role'] === "admin") {
+            header("Location: admin.php");
+        } elseif ($_SESSION['role'] === "employer") {
+            header("Location: employer.php");
+        } else {
+            header("Location: jobseeker.php");
+        }
         exit;
     } else {
         $error = "❌ Invalid username or password!";
@@ -115,9 +128,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p id="usernameError"></p>
 
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password"
-               value="<?= isset($_COOKIE['password']) ? htmlspecialchars($_COOKIE['password']) : '' ?>">
+        <input type="password" id="password" name="password">
         <p id="passwordError"></p>
+
+        <div style="margin: 10px 0;">
+            <input type="checkbox" id="remember" name="remember" <?= isset($_COOKIE['username']) ? 'checked' : '' ?>>
+            <label for="remember">Remember Me</label>
+        </div>
 
         <input type="submit" value="Login">
 

@@ -1,10 +1,7 @@
 <?php
 session_start();
-
-// Destroy all session data
-session_unset();
-session_destroy();
-
-// Redirect back to login page
-header("Location: ../views/login.php");
-exit;
+unset($_SESSION['status']);
+setcookie('username', '', time() - 10, '/');
+setcookie('password', '', time() - 10, '/');
+header("location: ../views/login.php");
+?>
