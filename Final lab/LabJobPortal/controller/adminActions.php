@@ -2,6 +2,56 @@
 
     require_once('../model/adminModel.php');
 
+function getAllEmployersController(){
+    return getAllEmployers();
+}
+
+function getEmployerByIdController($id){
+    return getEmployerById($id);
+}
+
+function searchEmployersController($searchTerm, $searchBy){
+    $allEmployers = getAllEmployers();
+    $searchResults = [];
+    
+    foreach($allEmployers as $employer){
+        if($searchBy == 'emp_name' && stripos($employer['Emp_name'], $searchTerm) !== false){
+            $searchResults[] = $employer;
+        }
+        elseif($searchBy == 'company_name' && stripos($employer['Company_name'], $searchTerm) !== false){
+            $searchResults[] = $employer;
+        }
+        elseif($searchBy == 'contact_no' && stripos($employer['Contact_No'], $searchTerm) !== false){
+            $searchResults[] = $employer;
+        }
+        elseif($searchBy == 'user_name' && stripos($employer['User_Name'], $searchTerm) !== false){
+            $searchResults[] = $employer;
+        }
+        elseif($searchBy == 'all' && (
+            stripos($employer['Emp_name'], $searchTerm) !== false ||
+            stripos($employer['Company_name'], $searchTerm) !== false ||
+            stripos($employer['Contact_No'], $searchTerm) !== false ||
+            stripos($employer['User_Name'], $searchTerm) !== false
+        )){
+            $searchResults[] = $employer;
+        }
+    }
+    return $searchResults;
+}
+
+if(isset($_POST['ajax_search'])){    
+    $searchTerm = isset($_POST['search_term']) ? trim($_POST['search_term']) : '';
+    
+    if(!empty($searchTerm)){
+        $results = searchEmployersController($searchTerm, 'emp_name');
+    } else {
+        $results = getAllEmployersController();
+    }
+    
+    echo json_encode($results);
+    exit();
+}
+
 if(isset($_POST['register_employer'])){
     $employer = array(
         'emp_name' => $_POST['emp_name'],

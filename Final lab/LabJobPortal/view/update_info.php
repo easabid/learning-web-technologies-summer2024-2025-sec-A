@@ -1,9 +1,9 @@
 <?php
-    require_once('../controller/updateController.php');
+    require_once('../controller/adminActions.php');
     
     $employer = null;
     if(isset($_GET['id'])){
-        $employer = getEmployerById($_GET['id']);
+        $employer = getEmployerByIdController($_GET['id']);
     }
 ?>
 
@@ -26,7 +26,7 @@
                 <th>Action</th>
             </tr>
             <?php
-                $employers = getAllEmployers();
+                $employers = getAllEmployersController();
                 foreach($employers as $emp):
             ?>
             <tr>
@@ -42,7 +42,7 @@
     <?php else: ?>
         <h3>Update Employer: <?php echo $employer['Emp_name']; ?></h3>
         
-        <form action="../controller/updateController.php" method="POST">
+        <form action="../controller/adminActions.php" method="POST">
             <input type="hidden" name="id" value="<?php echo $employer['id']; ?>">
             <table>
                 <tr>

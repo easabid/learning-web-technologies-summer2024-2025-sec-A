@@ -1,5 +1,5 @@
 <?php
-    require_once('../controller/deleteController.php');
+    require_once('../controller/adminActions.php');
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
     <script>
         function confirmDelete(empName, id) {
             if(confirm("Are you sure you want to delete employer: " + empName + "?")) {
-                window.location.href = "../controller/deleteController.php?delete_id=" + id;
+                window.location.href = "../controller/adminActions.php?delete_id=" + id;
             }
         }
     </script>
@@ -27,7 +27,7 @@
             <th>Action</th>
         </tr>
         <?php
-            $employers = getAllEmployers();
+            $employers = getAllEmployersController();
             foreach($employers as $employer):
         ?>
         <tr>
